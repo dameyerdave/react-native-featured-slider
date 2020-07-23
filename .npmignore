@@ -3,3 +3,5 @@
 !.npmignore
 !package.json
 !src/*
+!img/*
+!README.md

@@ -1,6 +1,5 @@
 ---
-id: slider
-title: Slider
+react-native-featured-slider
 ---
 
 Sliders allow users to select a value from a extended set of options.
