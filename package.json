@@ -1,5 +1,5 @@
 {
-  "main": "node_modules/expo/AppEntry.js",
+  "main": "src/index.js",
   "scripts": {
     "start": "expo start",
     "android": "expo start --android",
@@ -19,5 +19,22 @@
     "@babel/core": "^7.8.6",
     "babel-preset-expo": "~8.1.0"
   },
-  "private": true
+  "name": "react-native-featured-slider",
+  "version": "1.0.0",
+  "description": "A react native slider with additional features",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/dameyerdave/react-native-featured-slider.git"
+  },
+  "keywords": [
+    "react",
+    "native",
+    "slider"
+  ],
+  "author": "dameyerdave",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/dameyerdave/react-native-featured-slider/issues"
+  },
+  "homepage": "https://github.com/dameyerdave/react-native-featured-slider#readme"
 }

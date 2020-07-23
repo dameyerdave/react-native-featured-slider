@@ -9,7 +9,7 @@ export default function App() {
 
   return (
     <View style={styles.container}>
-      <Text>{level}</Text>
+      {/* <Text>{level}</Text> */}
       <Slider orientation='vertical' revert={true} backgroundImage={require('./assets/color_scale_large.png')} style={{borderWidth: 0}} debugTouchArea={false} step={1} minimumValue={1} maximumValue={10} minimumTrackTintColor="#ff0000" onValueChange={value => setLevel(value)} value={level} thumbStyle={{backgroundColor: 'rgba(0,0,0,0.5)'}}/>
       <StatusBar hidden={true} />
     </View>
