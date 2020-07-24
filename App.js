@@ -2,7 +2,7 @@ import { StatusBar } from 'expo-status-bar';
 import React, { useState } from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 
-import { Slider } from './src/Slider'
+import { Slider } from './src/index'
 
 export default function App() {
   const [level, setLevel] = useState(2)
