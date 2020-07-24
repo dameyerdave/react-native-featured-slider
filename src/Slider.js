@@ -351,7 +351,7 @@ class Slider extends Component {
       minimumTrackStyle.height = Animated.add(thumbStart, (thumbOffset != 0 ? thumbSize.height / 2 : thumbSize.height));
       minimumTrackStyle.marginLeft = -trackSize.width;
     } else {
-      minimumTrackStyle.width = Animated.add(thumbStart, (thumbOffset != 0 ? thumbSize.width / 2 : thumbSize.width));
+      minimumTrackStyle.width = Animated.add(thumbStart, (thumbOffset != 0 ? thumbSize.width / 2 : thumbSize.height));
       minimumTrackStyle.marginTop = -trackSize.height;
     }
     return minimumTrackStyle;
@@ -765,12 +765,11 @@ const styles = StyleSheet.create({
   trackVertical: {
     flex: 1,
     width: TRACK_SIZE,
-    // marginVertical: THUMB_SIZE / 2,
   },
   trackBackgroundImage: {
     position: 'absolute',
     zIndex: 1,
-    // marginVertical: THUMB_SIZE / 2
+    marginVertical: THUMB_SIZE / 2
   },
   thumb: {
     position: 'absolute',

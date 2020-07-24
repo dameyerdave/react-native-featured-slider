@@ -10,7 +10,7 @@ export default function App() {
   return (
     <View style={styles.container}>
       {/* <Text>{level}</Text> */}
-      <Slider orientation='vertical' thumbOffset={0} revert={true} backgroundColor='#f00' tickMarks={true} backgroundImage={require('./assets/color_scale_large.png')} style={{borderWidth: 0}} debugTouchArea={false} step={1} minimumValue={1} maximumValue={10} minimumTrackTintColor="#00ff00" onValueChange={value => setLevel(value)} value={level} thumbStyle={{backgroundColor: 'rgba(0,0,0,0.5)'}}/>
+      <Slider orientation='vertical' thumbOffset={0} revert={true} backgroundColor='#fff' tickMarks={true} backgroundImage={require('./assets/color_scale_large.png')} style={{borderWidth: 0}} debugTouchArea={false} step={1} minimumValue={1} maximumValue={10} minimumTrackTintColor="#00ff00" onValueChange={value => setLevel(value)} value={level} thumbStyle={{backgroundColor: 'rgba(0,0,0,0.5)'}}/>
       <StatusBar hidden={true} />
     </View>
   );
@@ -20,7 +20,7 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     flexDirection: 'row',
-    backgroundColor: '#f00',
+    backgroundColor: '#fff',
     alignItems: 'stretch',
     justifyContent: 'center',
     marginVertical: 40
