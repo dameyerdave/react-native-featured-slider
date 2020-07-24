@@ -20,7 +20,7 @@
     "babel-preset-expo": "~8.1.0"
   },
   "name": "react-native-featured-slider",
-  "version": "1.0.4",
+  "version": "1.0.5",
   "description": "A react native slider with additional features",
   "repository": {
     "type": "git",

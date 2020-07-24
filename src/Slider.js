@@ -21,12 +21,12 @@ const DEFAULT_ANIMATION_CONFIGS = {
 const getBoundedValue = ({ value, maximumValue, minimumValue, revert }) => {
   value = revert ? minimumValue + maximumValue - value : value
   return value > maximumValue
-  ? maximumValue
-  : value < minimumValue
-    ? minimumValue
-    : value 
+    ? maximumValue
+    : value < minimumValue
+      ? minimumValue
+      : value
 }
-  
+
 
 class Rect {
   constructor(x, y, width, height) {
@@ -108,7 +108,7 @@ class Slider extends Component {
     return false;
   }
 
-  setValueFromPress({nativeEvent}) {
+  setValueFromPress({ nativeEvent }) {
     const { minimumValue, maximumValue } = this.props
     const { thumbSize, containerSize } = this.state
     let x = 0
@@ -165,7 +165,7 @@ class Slider extends Component {
   }
 
   fireChangeEvent(event) {
-    const {maximumValue, minimumValue, revert} = this.props
+    const { maximumValue, minimumValue, revert } = this.props
     if (this.props[event]) {
       if (revert) {
         this.props[event](minimumValue + maximumValue - this.getCurrentValue());
@@ -341,16 +341,17 @@ class Slider extends Component {
   }
 
   getMinimumTrackStyles(thumbStart) {
+    const { thumbOffset } = this.props
     const { thumbSize, trackSize } = this.state;
     const minimumTrackStyle = {
       position: 'absolute',
     };
 
     if (this.props.orientation === 'vertical') {
-      minimumTrackStyle.height = Animated.add(thumbStart, thumbSize.height);
+      minimumTrackStyle.height = Animated.add(thumbStart, (thumbOffset != 0 ? thumbSize.height / 2 : thumbSize.height));
       minimumTrackStyle.marginLeft = -trackSize.width;
     } else {
-      minimumTrackStyle.width = Animated.add(thumbStart, thumbSize.width);
+      minimumTrackStyle.width = Animated.add(thumbStart, (thumbOffset != 0 ? thumbSize.width / 2 : thumbSize.width));
       minimumTrackStyle.marginTop = -trackSize.height;
     }
     return minimumTrackStyle;
@@ -442,6 +443,7 @@ class Slider extends Component {
       backgroundImage,
       backgroundColor,
       revert,
+      thumbOffset,
       ...other
     } = this.props;
 
@@ -504,28 +506,28 @@ class Slider extends Component {
           ])}
         />
         {
-        backgroundImage && <View
-          style={StyleSheet.flatten([
-            mainStyles.track,
-            orientation === 'vertical'
-              ? mainStyles.trackVertical
-              : mainStyles.trackHorizontal,
-            trackStyle,
-            this.getHiddenTrackStyle('start')
-          ])}
-        />
+          backgroundImage && <View
+            style={StyleSheet.flatten([
+              mainStyles.track,
+              orientation === 'vertical'
+                ? mainStyles.trackVertical
+                : mainStyles.trackHorizontal,
+              trackStyle,
+              this.getHiddenTrackStyle('start')
+            ])}
+          />
         }
         {
-        backgroundImage && <View
-          style={StyleSheet.flatten([
-            mainStyles.track,
-            orientation === 'vertical'
-              ? mainStyles.trackVertical
-              : mainStyles.trackHorizontal,
-            trackStyle,
-            this.getHiddenTrackStyle('end')
-          ])}
-        />
+          backgroundImage && <View
+            style={StyleSheet.flatten([
+              mainStyles.track,
+              orientation === 'vertical'
+                ? mainStyles.trackVertical
+                : mainStyles.trackHorizontal,
+              trackStyle,
+              this.getHiddenTrackStyle('end')
+            ])}
+          />
         }
         <Animated.View
           testID="sliderThumb"
@@ -537,6 +539,7 @@ class Slider extends Component {
               ? mainStyles.thumbVertical(trackStyle && trackStyle.width)
               : mainStyles.thumbHorizontal(trackStyle && trackStyle.height),
             thumbStyle,
+            { marginLeft: thumbOffset },
             {
               transform: [
                 ...this.getThumbPositionStyles(thumbStart),
@@ -711,7 +714,12 @@ Slider.propTypes = {
   /** 
    * The background color of the slider (useful if using with background image)
    */
-  backgroundColor: PropTypes.string
+  backgroundColor: PropTypes.string,
+
+  /**
+   * The offset of the thumb
+   */
+  thumbOffset: PropTypes.number
 };
 
 Slider.defaultProps = {
@@ -731,7 +739,8 @@ Slider.defaultProps = {
   backgroundImage: null,
   revert: false,
   updateOnPress: true,
-  backgroundColor: '#fff'
+  backgroundColor: '#fff',
+  thumbOffset: 0
 };
 
 const styles = StyleSheet.create({
@@ -751,7 +760,7 @@ const styles = StyleSheet.create({
   },
   trackHorizontal: {
     height: TRACK_SIZE,
-    // marginHorizontal: THUMB_SIZE / 2,
+    marginHorizontal: THUMB_SIZE / 2,
   },
   trackVertical: {
     flex: 1,
@@ -761,7 +770,7 @@ const styles = StyleSheet.create({
   trackBackgroundImage: {
     position: 'absolute',
     zIndex: 1,
-    marginVertical: THUMB_SIZE / 2
+    // marginVertical: THUMB_SIZE / 2
   },
   thumb: {
     position: 'absolute',

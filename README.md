@@ -56,6 +56,7 @@ import { Slider } from 'react-native-featured-slider';
   - [`backgroundColor`](#backgroundcolor)
   - [`revert`](#revert)
   - [`updateOnPress`](#updateonpress)
+  - [`thumbOffset`](#thumboffset)
 
 ---
 
@@ -326,3 +327,15 @@ To update the value if a position on the slider is pressed
 |  Type  | Default | Optional |
 | :----: | :-----: | :------: |
 |  bool  |  false  |   Yes    |
+
+---
+
+### `thumbOffset`
+
+Offset of the thumb
+
+|  Type  | Default | Optional |
+| :----: | :-----: | :------: |
+| number |    0    |   Yes    |
+
+---
