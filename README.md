@@ -53,6 +53,7 @@ import { Slider } from 'react-native-featured-slider';
   - [`tickMarks`](#tickmarks)
   - [`tickMarksColor`](#tickmarkscolor)
   - [`backgroundImage`](#backgroundimage)
+  - [`backgroundColor`](#backgroundcolor)
   - [`revert`](#revert)
   - [`updateOnPress`](#updateonpress)
 
@@ -295,6 +296,16 @@ The background image
 |  Type  | Default | Optional |
 | :---: | :-----: | :------: |
 |  any  |  null   |   Yes    |
+
+---
+
+### `backgroundColor`
+
+The background color of the slider (useful if you are working with a background image)
+
+|  Type    | Default | Optional |
+| :------: | :-------: | :------: |
+|  string  |  '#fff'   |   Yes    |
 
 ---
 

@@ -357,11 +357,12 @@ class Slider extends Component {
   }
 
   getHiddenTrackStyle(position) {
+    const { backgroundColor } = this.props
     const { thumbSize, trackSize } = this.state;
     const hiddenTrackStyle = {
       position: 'absolute',
       zIndex: 4,
-      backgroundColor: '#fff',
+      backgroundColor: backgroundColor,
       borderRadius: 0,
     }
     if (position === 'start') {
@@ -375,11 +376,11 @@ class Slider extends Component {
     } else {
       if (this.props.orientation === 'vertical') {
         hiddenTrackStyle.top = trackSize.width - thumbSize.width / 2 + TICK_SIZE / 2
-        hiddenTrackStyle.height = thumbSize.height / 2
+        hiddenTrackStyle.height = thumbSize.height / 2 - TICK_SIZE / 2
         hiddenTrackStyle.marginLeft = -trackSize.width;
       } else {
         hiddenTrackStyle.left = trackSize.width - thumbSize.width / 2 + TICK_SIZE / 2
-        hiddenTrackStyle.width = thumbSize.width / 2
+        hiddenTrackStyle.width = thumbSize.width / 2 - TICK_SIZE / 2
         hiddenTrackStyle.marginTop = -trackSize.height;
       }
     }
@@ -407,11 +408,11 @@ class Slider extends Component {
   }
 
   getTickMarkPositions() {
-    const { step, minimumValue, maximumValue } = this.props
+    const { step, minimumValue, maximumValue, tickMarks } = this.props
     const { allMeasured, thumbSize, trackSize } = this.state
 
     let positions = []
-    if (allMeasured) {
+    if (tickMarks && allMeasured) {
       const stepSize = (trackSize.width - thumbSize.width) / (maximumValue - minimumValue)
       if (step > 0) {
         positions.push(thumbSize.width / 2 - TICK_SIZE / 2)
@@ -436,7 +437,10 @@ class Slider extends Component {
       thumbStyle,
       debugTouchArea,
       orientation,
+      tickMarks,
+      tickMarksColor,
       backgroundImage,
+      backgroundColor,
       revert,
       ...other
     } = this.props;
@@ -499,7 +503,8 @@ class Slider extends Component {
             minimumTrackStyle,
           ])}
         />
-        <View
+        {
+        backgroundImage && <View
           style={StyleSheet.flatten([
             mainStyles.track,
             orientation === 'vertical'
@@ -509,7 +514,9 @@ class Slider extends Component {
             this.getHiddenTrackStyle('start')
           ])}
         />
-        <View
+        }
+        {
+        backgroundImage && <View
           style={StyleSheet.flatten([
             mainStyles.track,
             orientation === 'vertical'
@@ -519,6 +526,7 @@ class Slider extends Component {
             this.getHiddenTrackStyle('end')
           ])}
         />
+        }
         <Animated.View
           testID="sliderThumb"
           onLayout={this.measureThumb}
@@ -698,7 +706,12 @@ Slider.propTypes = {
   /**
    * To allow updates on press (not just on slide)
    */
-  updateOnPress: PropTypes.bool
+  updateOnPress: PropTypes.bool,
+
+  /** 
+   * The background color of the slider (useful if using with background image)
+   */
+  backgroundColor: PropTypes.string
 };
 
 Slider.defaultProps = {
@@ -717,7 +730,8 @@ Slider.defaultProps = {
   tickMarksColor: '#000',
   backgroundImage: null,
   revert: false,
-  updateOnPress: true
+  updateOnPress: true,
+  backgroundColor: '#fff'
 };
 
 const styles = StyleSheet.create({
